@@ -12,5 +12,6 @@ func main() {
 	// controllerパッケージから読み込む
 	router.GET("/", controller.IndexGET)
 	router.GET("/books", controller.BookIndex)
+	router.POST("/books", controller.BookCreate)
 	router.Run(":8080")
 }
