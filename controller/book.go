@@ -3,6 +3,7 @@ package controller
 import (
 	"fmt"
 	"time"
+	"strconv"
 	"github.com/gin-gonic/gin"
 	"bookshelf/models"
 	"bookshelf/config"
@@ -42,4 +43,39 @@ func BookCreate(c *gin.Context) {
 	// 元の形に戻す
 	result.Scan(&data)
 	c.JSON(201, data)
+}
+
+func BookUpdate(c *gin.Context) {
+	var data models.Book
+	var book models.Book
+
+	if c.Query("Title") != "" {
+		data.Title = c.Query("Title")
+	}
+	if c.Query("Author") != "" {
+		data.Author = c.Query("Author")
+	}
+	if c.Query("Publisher") != "" {
+		data.Publisher = c.Query("Publisher")
+	}
+	if c.Query("PublishedDate") != "" {
+		layout := "2006-01-02"
+		t,err := time.Parse(layout, c.Query("PublishedDate"))
+		if err != nil{
+			panic(err)
+		}
+		data.PublishedDate = t
+	}
+	now := time.Now()
+	data.UpdatedAt = now
+
+	book.Id, _ = strconv.ParseInt(c.Params.ByName("id"), 10, 64)
+
+	// Modelで変更するインスタンスを指定し，dataにある空(0や'')ではないメンバだけを更新する
+	result := db.Model(&book).Updates(&data)
+	if result.Error != nil {
+		panic(result.Error)
+	}
+
+	c.JSON(204, nil)
 }

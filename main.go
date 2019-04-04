@@ -13,5 +13,6 @@ func main() {
 	router.GET("/", controller.IndexGET)
 	router.GET("/books", controller.BookIndex)
 	router.POST("/books", controller.BookCreate)
+	router.PUT("/books/:id", controller.BookUpdate)
 	router.Run(":8080")
 }
