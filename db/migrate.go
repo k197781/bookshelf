@@ -8,4 +8,5 @@ import (
 func main(){
 	db := database.GetConnection()
 	db.CreateTable(&models.Book{})
+	db.CreateTable(&models.User{})
 }
