@@ -1,8 +1,6 @@
 package main
 
 import (
-	"github.com/jinzhu/gorm"
-	_ "github.com/go-sql-driver/mysql"
 	"bookshelf/models"
 	"bookshelf/config"
 )
