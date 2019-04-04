@@ -79,3 +79,15 @@ func BookUpdate(c *gin.Context) {
 
 	c.JSON(204, nil)
 }
+
+func BookDelete(c *gin.Context) {
+	var book models.Book
+	book.Id, _ = strconv.ParseInt(c.Params.ByName("id"), 10, 64)
+
+	result := db.Delete(&book)
+	if result.Error != nil {
+		panic(result.Error)
+	}
+
+	c.JSON(204, nil)
+}
