@@ -21,8 +21,9 @@ func GetDBConfig() (string, string) {
 	PASS := ""
 	PROTOCOL := "tcp(localhost:3306)"
 	DBNAME := "bookshelf"
-
-	CONNECT := USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME
+	// structで指定したPublishedDateの型([]uint8)と，SQLのpublished_dateの型(*time.Time)が違がうことを許容する．
+	OPTION := "parseTime=true"
+	CONNECT := USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME + "?" + OPTION
 
 	return DBMS, CONNECT
 }
