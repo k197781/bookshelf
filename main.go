@@ -16,5 +16,6 @@ func main() {
 	router.PUT("/books/:id", controller.BookUpdate)
 	router.DELETE("/books/:id", controller.BookDelete)
 	router.POST("/users", controller.UserCreate)
+	router.PUT("/users/:id", controller.UserUpdate)
 	router.Run(":8080")
 }
